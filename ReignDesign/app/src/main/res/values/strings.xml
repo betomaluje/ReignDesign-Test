@@ -1,8 +1,32 @@
 <resources>
     <string name="app_name">ReignDesign Test</string>
 
+    <plurals name="weeks">
+        <item quantity="one">%d week</item>
+        <item quantity="other">%d weeks</item>
+    </plurals>
+
+    <plurals name="days">
+        <item quantity="one">%d day ago</item>
+        <item quantity="other">%d days ago</item>
+    </plurals>
+
+    <plurals name="hours">
+        <item quantity="one">%d hour ago</item>
+        <item quantity="other">%d hs ago</item>
+    </plurals>
+
+    <plurals name="minutes">
+        <item quantity="one">%d min ago</item>
+        <item quantity="other">%d mins ago</item>
+    </plurals>
+
+    <string name="date_now">Just now</string>
+
+    <!-- ACTIONS -->
     <string name="action_delete">Delete</string>
 
+    <!-- ERRORS -->
     <string name="error_no_data">There\'s no data available</string>
 
 </resources>

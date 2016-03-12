@@ -1,7 +1,6 @@
 package com.betomaluje.android.reigndesigntest.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +9,14 @@ import com.betomaluje.android.reigndesigntest.R;
 import com.betomaluje.android.reigndesigntest.interfaces.OnArticleClicked;
 import com.betomaluje.android.reigndesigntest.retrofit.models.Hit;
 import com.betomaluje.android.reigndesigntest.viewholders.ArticleViewHolder;
+import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 
 import java.util.ArrayList;
 
 /**
  * Created by betomaluje on 3/11/16.
  */
-public class ArticlesRecyclerAdapter extends RecyclerView.Adapter<ArticleViewHolder> {
+public class ArticlesRecyclerAdapter extends RecyclerSwipeAdapter<ArticleViewHolder> {
 
     private ArrayList<Hit> items;
     private Context context;
@@ -30,10 +30,15 @@ public class ArticlesRecyclerAdapter extends RecyclerView.Adapter<ArticleViewHol
         this.onArticleClicked = onArticleClicked;
     }
 
+    public void deleteItem(int position) {
+        items.remove(position);
+        notifyItemRemoved(position);
+    }
+
     @Override
     public ArticleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.row_item_article, parent, false);
-        return new ArticleViewHolder(view);
+        return new ArticleViewHolder(context, view, onArticleClicked);
     }
 
     @Override
@@ -46,4 +51,8 @@ public class ArticlesRecyclerAdapter extends RecyclerView.Adapter<ArticleViewHol
         return items.size();
     }
 
+    @Override
+    public int getSwipeLayoutResourceId(int position) {
+        return R.id.swipeLayout;
+    }
 }

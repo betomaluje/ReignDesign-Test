@@ -16,25 +16,25 @@ public class Hit {
     private String createdAt;
     @SerializedName("title")
     @Expose
-    private Object title;
+    private String title;
     @SerializedName("url")
     @Expose
-    private Object url;
+    private String url;
     @SerializedName("author")
     @Expose
     private String author;
     @SerializedName("points")
     @Expose
-    private Object points;
+    private int points;
     @SerializedName("story_text")
     @Expose
-    private Object storyText;
+    private String storyText;
     @SerializedName("comment_text")
     @Expose
     private String commentText;
     @SerializedName("num_comments")
     @Expose
-    private Object numComments;
+    private int numComments;
     @SerializedName("story_id")
     @Expose
     private int storyId;
@@ -77,28 +77,28 @@ public class Hit {
     /**
      * @return The title
      */
-    public Object getTitle() {
+    public String getTitle() {
         return title;
     }
 
     /**
      * @param title The title
      */
-    public void setTitle(Object title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
     /**
      * @return The url
      */
-    public Object getUrl() {
+    public String getUrl() {
         return url;
     }
 
     /**
      * @param url The url
      */
-    public void setUrl(Object url) {
+    public void setUrl(String url) {
         this.url = url;
     }
 
@@ -119,28 +119,28 @@ public class Hit {
     /**
      * @return The points
      */
-    public Object getPoints() {
+    public int getPoints() {
         return points;
     }
 
     /**
      * @param points The points
      */
-    public void setPoints(Object points) {
+    public void setPoints(int points) {
         this.points = points;
     }
 
     /**
      * @return The storyText
      */
-    public Object getStoryText() {
+    public String getStoryText() {
         return storyText;
     }
 
     /**
      * @param storyText The story_text
      */
-    public void setStoryText(Object storyText) {
+    public void setStoryText(String storyText) {
         this.storyText = storyText;
     }
 
@@ -161,14 +161,14 @@ public class Hit {
     /**
      * @return The numComments
      */
-    public Object getNumComments() {
+    public int getNumComments() {
         return numComments;
     }
 
     /**
      * @param numComments The num_comments
      */
-    public void setNumComments(Object numComments) {
+    public void setNumComments(int numComments) {
         this.numComments = numComments;
     }
 
@@ -282,6 +282,19 @@ public class Hit {
      */
     public void setHighlightResult(HighlightResult HighlightResult) {
         this.HighlightResult = HighlightResult;
+    }
+
+    public String getTrueTitle() {
+        if (title != null && !title.isEmpty()) {
+            return title;
+        } else if (storyTitle != null && !storyTitle.isEmpty()) {
+            return storyTitle;
+        } else if (getHighlightResult() != null && getHighlightResult().getStoryTitle() != null &&
+                getHighlightResult().getStoryTitle().getValue() != null && !getHighlightResult().getStoryTitle().getValue().isEmpty()) {
+            return getHighlightResult().getStoryTitle().getValue();
+        } else {
+            return "";
+        }
     }
 
 }
