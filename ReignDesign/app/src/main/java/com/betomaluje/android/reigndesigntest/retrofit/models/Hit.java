@@ -297,4 +297,17 @@ public class Hit {
         }
     }
 
+    public String getTrueUrl() {
+        if (url != null && !url.isEmpty()) {
+            return url;
+        } else if (storyUrl != null && !storyUrl.isEmpty()) {
+            return storyUrl;
+        } else if (HighlightResult != null && HighlightResult.getStoryUrl() != null &&
+                HighlightResult.getStoryUrl().getValue() != null && !HighlightResult.getStoryUrl().getValue().isEmpty()) {
+            return getHighlightResult().getStoryUrl().getValue();
+        } else {
+            return "";
+        }
+    }
+
 }

@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.betomaluje.android.reigndesigntest.R;
 import com.betomaluje.android.reigndesigntest.interfaces.OnArticleClicked;
-import com.betomaluje.android.reigndesigntest.retrofit.models.Hit;
+import com.betomaluje.android.reigndesigntest.models.Article;
 import com.betomaluje.android.reigndesigntest.utils.DateUtils;
 import com.daimajia.swipe.SwipeLayout;
 
@@ -48,10 +48,10 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.O
         relativeLayoutDelete.setOnClickListener(this);
     }
 
-    public void fillData(final Hit article) {
-        textViewTitle.setText(article.getTrueTitle());
+    public void fillData(final Article article) {
+        textViewTitle.setText(article.getTitle());
 
-        String details = article.getAuthor() + " " + DateUtils.getDate(context, article.getCreatedAt());
+        String details = article.getAuthor() + " - " + DateUtils.getDate(context, article.getDate());
 
         textViewDetails.setText(details);
 
@@ -62,7 +62,7 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.O
 
     @Override
     public void onClick(View v) {
-        Hit article = (Hit) v.getTag();
+        Article article = (Article) v.getTag();
         if (article != null && onArticleClicked != null) {
             if (v.getId() == R.id.relativeLayout_surfaceView) {
                 onArticleClicked.onClicked(v, getLayoutPosition(), article);

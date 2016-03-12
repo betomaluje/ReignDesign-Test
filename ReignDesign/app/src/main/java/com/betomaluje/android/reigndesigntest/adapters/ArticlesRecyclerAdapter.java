@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.betomaluje.android.reigndesigntest.R;
 import com.betomaluje.android.reigndesigntest.interfaces.OnArticleClicked;
-import com.betomaluje.android.reigndesigntest.retrofit.models.Hit;
+import com.betomaluje.android.reigndesigntest.models.Article;
 import com.betomaluje.android.reigndesigntest.viewholders.ArticleViewHolder;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 
@@ -18,21 +18,35 @@ import java.util.ArrayList;
  */
 public class ArticlesRecyclerAdapter extends RecyclerSwipeAdapter<ArticleViewHolder> {
 
-    private ArrayList<Hit> items;
+    private ArrayList<Article> items;
     private Context context;
     private LayoutInflater inflater;
     private OnArticleClicked onArticleClicked;
 
-    public ArticlesRecyclerAdapter(Context context, ArrayList<Hit> items, OnArticleClicked onArticleClicked) {
-        this.items = items;
+    public ArticlesRecyclerAdapter(Context context, OnArticleClicked onArticleClicked) {
+        this.items = new ArrayList<>();
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.onArticleClicked = onArticleClicked;
     }
 
+    public void addItems(ArrayList<Article> articles) {
+        items.addAll(articles);
+        notifyDataSetChanged();
+    }
+
+    public void addItem(Article article) {
+        items.add(article);
+    }
+
     public void deleteItem(int position) {
         items.remove(position);
         notifyItemRemoved(position);
+    }
+
+    public void clear() {
+        items.clear();
+        notifyDataSetChanged();
     }
 
     @Override
