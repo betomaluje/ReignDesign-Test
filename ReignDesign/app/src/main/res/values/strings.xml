@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ReignDesign Test</string>
+
+    <string name="action_delete">Delete</string>
+
+    <string name="error_no_data">There\'s no data available</string>
+
+</resources>
