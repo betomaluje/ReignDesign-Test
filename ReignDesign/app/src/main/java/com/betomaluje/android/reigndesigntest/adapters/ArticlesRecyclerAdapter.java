@@ -12,6 +12,8 @@ import com.betomaluje.android.reigndesigntest.viewholders.ArticleViewHolder;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by betomaluje on 3/11/16.
@@ -47,6 +49,13 @@ public class ArticlesRecyclerAdapter extends RecyclerSwipeAdapter<ArticleViewHol
     public void clear() {
         items.clear();
         notifyDataSetChanged();
+    }
+
+    public void removeDuplicates() {
+        Set<Article> hs = new HashSet<>();
+        hs.addAll(items);
+        items.clear();
+        items.addAll(hs);
     }
 
     @Override

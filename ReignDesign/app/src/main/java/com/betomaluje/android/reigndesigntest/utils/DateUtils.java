@@ -19,11 +19,18 @@ public class DateUtils {
 
     private static DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
+    public static DateTime convertDate(String createdAt) {
+        if (createdAt == null || createdAt.isEmpty())
+            return null;
+        else
+            return DateTime.parse(createdAt, formatter);
+    }
+
     public static String getDate(Context context, String createdAt) {
         if (createdAt == null || createdAt.isEmpty())
             return "";
 
-        DateTime program = DateTime.parse(createdAt, formatter);
+        DateTime program = convertDate(createdAt);
 
         //2016-02-08T14:33:40.749-03:00
         DateTime now = new DateTime();

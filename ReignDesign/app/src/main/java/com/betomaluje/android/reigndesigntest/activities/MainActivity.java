@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements OnArticleClicked 
 
     boolean hasInternet;
     ArticlesDBManager articlesDB;
+    Call lastCall;
 
     //for endless scrolling
     LinearLayoutManager mLayoutManager;
@@ -146,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements OnArticleClicked 
     }
 
     private void getArticlesFromAPI() {
-        new RetrofitManager().getArticles(currentPage, new Callback<ArticlesRequest>() {
+        lastCall = new RetrofitManager().getArticles(currentPage, new Callback<ArticlesRequest>() {
             @Override
             public void onResponse(Response<ArticlesRequest> response, Retrofit retrofit) {
 
@@ -165,8 +167,9 @@ public class MainActivity extends AppCompatActivity implements OnArticleClicked 
                             }
                         }
 
-                        adapter.notifyDataSetChanged();
+                        adapter.removeDuplicates();
 
+                        adapter.notifyDataSetChanged();
 
                         //we get the next page
                         currentPage = articlesRequest.getPage() + 1;
@@ -229,6 +232,9 @@ public class MainActivity extends AppCompatActivity implements OnArticleClicked 
             loadingDialog.dismiss();
             loadingDialog.cancel();
         }
+
+        if (lastCall != null)
+            lastCall.cancel();
 
         articlesDB.close();
         super.onPause();

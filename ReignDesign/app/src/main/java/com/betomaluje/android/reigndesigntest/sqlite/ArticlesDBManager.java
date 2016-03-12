@@ -10,6 +10,8 @@ import com.betomaluje.android.reigndesigntest.models.Article;
 import com.betomaluje.android.reigndesigntest.retrofit.models.Hit;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by betomaluje on 3/12/16.
@@ -66,9 +68,9 @@ public class ArticlesDBManager {
 
             return newArticle;
         } else {
+
             return oldArticle;
         }
-
     }
 
     public Article getArticle(long id) {
@@ -113,6 +115,7 @@ public class ArticlesDBManager {
         }
         // make sure to close the cursor
         cursor.close();
+
         return articles;
     }
 
